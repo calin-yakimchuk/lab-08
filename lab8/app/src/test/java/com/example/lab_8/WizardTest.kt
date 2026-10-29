@@ -49,4 +49,24 @@ class WizardTest {
 
     }
 
+    @Test
+    fun train_insufficientManaToTrain_trainingFails() {
+        evilWizard.mana = 2 // less than 5 mana, not enough to train
+
+        evilWizard.train() // not enough mana, nothing happens
+
+        assertEquals(2, evilWizard.mana) // mana stays at 2
+        assertEquals(10, evilWizard.spellPower) // spellPower stays at 10
+    }
+
+    @Test
+    fun train_sufficientManaToTrain_manaSetToTwentyFiveAndSpellPowerSetToEleven() {
+
+        // 30 is enough mana to train
+        evilWizard.train() // 30 - 5 = 25 mana, 10 + 1 = 11 spellPower
+
+        assertEquals(25, evilWizard.mana) // 30 - 5 = 25 mana remaining
+        assertEquals(11, evilWizard.spellPower) // 10 + 1 = 11 spellPower
+    }
+
 }
